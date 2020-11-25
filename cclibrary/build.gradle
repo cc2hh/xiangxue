@@ -1,6 +1,5 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
-// println("cc-----app----test")
 def version = rootProject.ext.androidID
 
 android {
@@ -8,23 +7,17 @@ android {
     buildToolsVersion version.buildToolsVersion
 
     defaultConfig {
-        applicationId appID.applicationId
         minSdkVersion version.minSdkVersion
         targetSdkVersion version.targetSdkVersion
         versionCode version.versionCode
         versionName version.versionName
 
         testInstrumentationRunner version.testInstrumentationRunner
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
-        debug {
-            buildConfigField("String", "url", "\"${url.debug}\"")
-        }
-
         release {
-            buildConfigField("String", "url", "\"${url.release}\"")
-
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -34,7 +27,10 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    dependenciesID.each { k, v -> implementation v }
+    dependenciesID.each { k, v ->
+        if (k == "appcompat")
+            implementation v
+    }
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

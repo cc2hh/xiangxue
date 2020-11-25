@@ -1,3 +1,30 @@
-ext{
+ext {
 
+    // 正式版标志
+    isRelease = false
+
+    url = [
+            "debug"  : "http://192.168.0.252/debug",
+            "release": "http://192.168.0.252/release"
+    ]
+
+    androidID = [
+            compileSdkVersion        : 29,
+            buildToolsVersion        : "29.0.3",
+            minSdkVersion            : 16,
+            targetSdkVersion         : 29,
+            versionCode              : 1,
+            versionName              : "1.0",
+            testInstrumentationRunner: "androidx.test.runner.AndroidJUnitRunner"
+    ]
+
+
+    appID = [
+            applicationId: "com.cc.test.module"
+    ]
+
+    dependenciesID = [
+            "appcompat"       : 'androidx.appcompat:appcompat:1.2.0',
+            "constraintlayout": 'androidx.constraintlayout:constraintlayout:2.0.4'
+    ]
 }
